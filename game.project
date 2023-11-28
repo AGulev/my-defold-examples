@@ -1,0 +1,95 @@
+[project]
+title = Boom
+version = 1.0.1
+
+[bootstrap]
+main_collection = /main/main.collectionc
+
+[input]
+game_binding = /input/game.input_bindingc
+use_accelerometer = 0
+
+[display]
+width = 1280
+height = 720
+high_dpi = 1
+
+[script]
+shared_state = 1
+
+[windows]
+app_icon = /assets/app_icons/appicon.ico
+
+[osx]
+app_icon = /assets/app_icons/appicon.icns
+
+[android]
+input_method = HiddenInputField
+
+[physics]
+gravity_y = -1000.0
+scale = 0.01
+max_collision_object_count = 1024
+max_contacts = 4096
+max_collisions = 4096
+allow_dynamic_transforms = 0
+
+[sprite]
+max_count = 1024
+
+[graphics]
+max_debug_vertices = 0
+max_draw_calls = 8
+max_characters = 1
+
+[html5]
+heap_size = 32
+
+[collection]
+max_instances = 1024
+max_input_stack_entries = 1
+
+[collectionfactory]
+max_count = 1
+
+[collection_proxy]
+max_count = 1
+
+[factory]
+max_count = 1
+
+[gui]
+max_count = 1
+max_particlefx_count = 1
+max_animation_count = 1
+max_particle_count = 1
+
+[label]
+max_count = 1
+
+[mesh]
+max_count = 0
+
+[model]
+max_count = 0
+
+[particle_fx]
+max_count = 0
+max_emitter_count = 0
+max_particle_count = 0
+
+[sound]
+max_sound_data = 0
+max_sound_buffers = 0
+max_sound_sources = 0
+max_sound_instances = 0
+max_component_count = 0
+gain = 0.0
+
+[tilemap]
+max_count = 0
+max_tile_count = 0
+
+[resource]
+max_resources = 1024
+
