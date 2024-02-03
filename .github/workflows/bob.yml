@@ -39,7 +39,7 @@ jobs:
 
       - name: Prepare README
           run: |
-            rm README.md
+            rm -f README.md
             echo "# My Defold examples" > README.md
             echo "" >> README.md
 
