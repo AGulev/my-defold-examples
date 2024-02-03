@@ -63,6 +63,8 @@ jobs:
 
       - name: Publish README
         run: |
+          git config --global user.email "me@agulev.com"
+          git config --global user.name "AGulev's GitHub Actions"
           git add README.md
           git commit -m "Update README with Defold examples"
           git push
@@ -71,8 +73,6 @@ jobs:
         env:
           PUBLISH_GAMES_ACCESS_TOKEN: ${{ secrets.PUBLISH_GAMES_ACCESS_TOKEN }}
         run: |
-          git config --global user.email "me@agulev.com"
-          git config --global user.name "AGulev's GitHub Actions"
           git clone https://github.com/AGulev/AGulev.git agulev_repo
           cd agulev_repo
           git fetch origin ahul.eu:ahul.eu
