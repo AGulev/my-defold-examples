@@ -43,6 +43,7 @@ max_characters = 1
 
 [html5]
 heap_size = 32
+wasm_streaming = 1
 
 [collection]
 max_instances = 1024
