@@ -71,9 +71,14 @@ jobs:
           git config --global user.email "me@agulev.com"
           git config --global user.name "AGulev's GitHub Actions"
           git add README.md
-          git commit -m "Update README with Defold examples"
-          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
-          git push
+          git diff --staged --exit-code && changed=0 || changed=1
+          if [ "$changed" -eq "1" ]; then
+            git commit -m "Update README with Defold examples"
+            git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
+            git push
+          else
+            echo "No changes to commit."
+          fi
 
       - name: Publish Examples
         env:
@@ -89,6 +94,12 @@ jobs:
           cp -r ./build_output/* ./agulev_repo/demos/
           cd agulev_repo
           git add demos/
-          git commit -m "Automated build results"
-          git remote set-url origin https://x-access-token:${PUBLISH_GAMES_ACCESS_TOKEN}@github.com/AGulev/AGulev.git
-          git push origin ahul.eu
+          git diff --staged --exit-code && changed=0 || changed=1
+          if [ "$changed" -eq "1" ]; then
+            git commit -m "Automated build results"
+            git remote set-url origin https://x-access-token:${PUBLISH_GAMES_ACCESS_TOKEN}@github.com/AGulev/AGulev.git
+            git push origin ahul.eu
+          else
+            echo "No changes to commit."
+          fi
+          
