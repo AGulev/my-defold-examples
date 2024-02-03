@@ -37,10 +37,17 @@ jobs:
         run: |
           wget -q http://d.defold.com/archive/${{env.CHANNEL}}/${{env.DEFOLD_VERSION}}/bob/bob.jar
 
+      - name: Prepare README
+          run: |
+            rm README.md
+            echo "# My Defold examples" > README.md
+            echo "" >> README.md
+
       - name: Scan for game.project and Build
         run: |
           find . -name 'game.project' -print0 | while IFS= read -r -d '' file; do
             dir=$(dirname "$file")
+            project_name=$(basename "$dir")
             echo "Building project in $dir"
             # Change into the project directory
             cd "$dir"
@@ -48,9 +55,17 @@ jobs:
             java -jar ../bob.jar resolve --email a@b.com --auth 123456
             java -jar ../bob.jar --platform=${{ matrix.platform }} build --archive --build-server=${{env.BUILD_SERVER}} --variant=${{env.VARIANT}}
             java -jar ../bob.jar --platform=${{ matrix.platform }} bundle --bo=../build_output
+            # Append project link to README.md
+            echo "[$project_name](https://github.com/AGulev/defold-example-physics-explosion/tree/master/$project_name) - [HTML bundle](https://ahul.eu/demos/$project_name/)" >> ../README.md
             # Change back to the root directory
             cd -
           done
+
+      - name: Publish README
+        run: |
+          git add README.md
+          git commit -m "Update README with Defold examples"
+          git push
 
       - name: Publish Examples
         env:
