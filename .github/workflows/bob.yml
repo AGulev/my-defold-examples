@@ -3,6 +3,7 @@ name: Build with bob
 on:
   push:
     branches: [ "master" ]
+  workflow_dispatch:
 
 env:
   VERSION_FILENAME: 'info.json'
