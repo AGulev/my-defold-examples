@@ -56,7 +56,7 @@ jobs:
             java -jar ../bob.jar --platform=${{ matrix.platform }} build --archive --build-server=${{env.BUILD_SERVER}} --variant=${{env.VARIANT}}
             java -jar ../bob.jar --platform=${{ matrix.platform }} bundle --bo=../build_output
             # Append project link to README.md
-            echo "[$project_name](https://github.com/AGulev/defold-example-physics-explosion/tree/master/$project_name) - [HTML bundle](https://ahul.eu/demos/$project_name/)" >> ../README.md
+            echo "[$project_name](https://github.com/${{ github.repository }}/tree/master/$project_name) - [HTML bundle](https://ahul.eu/demos/$project_name/)" >> ../README.md
             # Change back to the root directory
             cd -
           done
@@ -67,6 +67,7 @@ jobs:
           git config --global user.name "AGulev's GitHub Actions"
           git add README.md
           git commit -m "Update README with Defold examples"
+          git remote set-url origin https://x-access-token:${PUBLISH_GAMES_ACCESS_TOKEN}@github.com/${{ github.repository }}.git
           git push
 
       - name: Publish Examples
