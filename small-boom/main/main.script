@@ -32,6 +32,7 @@ function init(self)
     timer.delay(1, false, function()
         physics.set_gravity(gravity)
         physics.wakeup(url)
+        self.start_scale = url
     end)
     
     msg.post(".", "acquire_input_focus")
@@ -47,5 +48,13 @@ function on_input(self, action_id, action)
         cached_pos.y = action.y
         go.set(OBJ, POSITION, cached_pos)
         timer.delay(0.05, false, return_out_pos)
+    end
+end
+
+function update(self)
+    if self.start_scale then
+        local box = physics.get_shape(self.start_scale, "Box")
+        box.dimensions = box.dimensions + vmath.vector3(0.001,0.001,0)
+        physics.set_shape(self.start_scale, "Box", box)
     end
 end

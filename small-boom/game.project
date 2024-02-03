@@ -33,12 +33,12 @@ max_collision_object_count = 1024
 max_contacts = 4096
 max_collisions = 4096
 allow_dynamic_transforms = 0
+debug = 1
 
 [sprite]
 max_count = 1024
 
 [graphics]
-max_debug_vertices = 0
 max_draw_calls = 8
 max_characters = 1
 
