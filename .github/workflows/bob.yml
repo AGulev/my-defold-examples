@@ -38,10 +38,10 @@ jobs:
           wget -q http://d.defold.com/archive/${{env.CHANNEL}}/${{env.DEFOLD_VERSION}}/bob/bob.jar
 
       - name: Prepare README
-          run: |
-            rm -f README.md
-            echo "# My Defold examples" > README.md
-            echo "" >> README.md
+        run: |
+          rm -f README.md
+          echo "# My Defold examples" > README.md
+          echo "" >> README.md
 
       - name: Scan for game.project and Build
         run: |
