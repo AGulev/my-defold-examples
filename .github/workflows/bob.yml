@@ -64,5 +64,5 @@ jobs:
           cd agulev_repo
           git add demos/
           git commit -m "Automated build results"
-          git remote set-url origin https://x-access-token:${{PUBLISH_GAMES_ACCESS_TOKEN}}@github.com/AGulev/AGulev.git
+          git remote set-url origin https://x-access-token:${PUBLISH_GAMES_ACCESS_TOKEN}@github.com/AGulev/AGulev.git
           git push origin ahul.eu
