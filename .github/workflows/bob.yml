@@ -52,14 +52,17 @@ jobs:
             cd -
           done
 
-      - name: Configure Git
+      - name: Publish Examples
         env:
           PUBLISH_GAMES_ACCESS_TOKEN: ${{ secrets.PUBLISH_GAMES_ACCESS_TOKEN }}
         run: |
           git config --global user.email "me@agulev.com"
           git config --global user.name "AGulev's GitHub Actions"
           git clone https://github.com/AGulev/AGulev.git agulev_repo
+          cd agulev_repo
+          git fetch origin ahul.eu:ahul.eu
           git checkout ahul.eu
+          cd ..
           cp -r ./build_output/* ./agulev_repo/demos/
           cd agulev_repo
           git add demos/
