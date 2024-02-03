@@ -42,7 +42,12 @@ jobs:
           find . -name 'game.project' -print0 | while IFS= read -r -d '' file; do
             dir=$(dirname "$file")
             echo "Building project in $dir"
-            java -jar bob.jar --root "$dir" resolve --email ${{ secrets.EMAIL }} --auth ${{ secrets.AUTH_TOKEN }}
-            java -jar bob.jar --root "$dir" --platform=${{ matrix.platform }} build --archive --build-server=${{env.BUILD_SERVER}} --variant=${{env.VARIANT}}
-            java -jar bob.jar --root "$dir" --platform=${{ matrix.platform }} bundle
+            # Change into the project directory
+            cd "$dir"
+            # Use ../bob.jar to reference bob.jar from the project directory
+            java -jar ../bob.jar resolve --email ${{ secrets.EMAIL }} --auth ${{ secrets.AUTH_TOKEN }}
+            java -jar ../bob.jar --platform=${{ matrix.platform }} build --archive --build-server=${{env.BUILD_SERVER}} --variant=${{env.VARIANT}}
+            java -jar ../bob.jar --platform=${{ matrix.platform }} bundle
+            # Change back to the root directory
+            cd -
           done
