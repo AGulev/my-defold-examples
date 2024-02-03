@@ -51,15 +51,18 @@ jobs:
             # Change back to the root directory
             cd -
           done
-          
+
       - name: Configure Git
+        env:
+          PUBLISH_GAMES_ACCESS_TOKEN: ${{ secrets.PUBLISH_GAMES_ACCESS_TOKEN }}
         run: |
-          git config --global user.email "your-email@example.com"
-          git config --global user.name "GitHub Actions"
+          git config --global user.email "me@agulev.com"
+          git config --global user.name "AGulev's GitHub Actions"
           git clone https://github.com/AGulev/AGulev.git agulev_repo
+          git checkout ahul.eu
           cp -r ./build_output/* ./agulev_repo/demos/
           cd agulev_repo
-          git checkout ahul.eu
           git add demos/
           git commit -m "Automated build results"
+          git remote set-url origin https://x-access-token:${PUBLISH_GAMES_ACCESS_TOKEN}@github.com/AGulev/AGulev.git
           git push origin ahul.eu
