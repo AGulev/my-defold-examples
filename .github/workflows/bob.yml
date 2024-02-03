@@ -2,7 +2,7 @@ name: Build with bob
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "master", "action_fixes"]
   workflow_dispatch:
 
 env:
@@ -47,7 +47,19 @@ jobs:
             # Use ../bob.jar to reference bob.jar from the project directory
             java -jar ../bob.jar resolve --email a@b.com --auth 123456
             java -jar ../bob.jar --platform=${{ matrix.platform }} build --archive --build-server=${{env.BUILD_SERVER}} --variant=${{env.VARIANT}}
-            java -jar ../bob.jar --platform=${{ matrix.platform }} bundle
+            java -jar ../bob.jar --platform=${{ matrix.platform }} bundle --bo=../build_output
             # Change back to the root directory
             cd -
           done
+          
+      - name: Configure Git
+        run: |
+          git config --global user.email "your-email@example.com"
+          git config --global user.name "GitHub Actions"
+          git clone https://github.com/AGulev/AGulev.git agulev_repo
+          cp -r ./build_output/* ./agulev_repo/demos/
+          cd agulev_repo
+          git checkout ahul.eu
+          git add demos/
+          git commit -m "Automated build results"
+          git push origin ahul.eu
