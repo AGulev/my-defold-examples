@@ -5,6 +5,9 @@ on:
     branches: [ "master", "action_fixes"]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 env:
   VERSION_FILENAME: 'info.json'
   CHANNEL: 'beta'
