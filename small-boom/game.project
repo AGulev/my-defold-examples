@@ -1,5 +1,5 @@
 [project]
-title = Boom
+title = small-boom
 version = 1.0.1
 
 [bootstrap]
@@ -33,7 +33,6 @@ max_collision_object_count = 1024
 max_contacts = 4096
 max_collisions = 4096
 allow_dynamic_transforms = 0
-debug = 1
 
 [sprite]
 max_count = 1024
@@ -44,6 +43,7 @@ max_characters = 1
 
 [html5]
 heap_size = 32
+wasm_streaming = 1
 
 [collection]
 max_instances = 1024

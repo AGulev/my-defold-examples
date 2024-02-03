@@ -2,8 +2,11 @@ name: Build with bob
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "master", "action_fixes"]
   workflow_dispatch:
+
+permissions:
+  contents: write
 
 env:
   VERSION_FILENAME: 'info.json'
@@ -37,17 +40,66 @@ jobs:
         run: |
           wget -q http://d.defold.com/archive/${{env.CHANNEL}}/${{env.DEFOLD_VERSION}}/bob/bob.jar
 
+      - name: Prepare README
+        run: |
+          rm -f README.md
+          echo "# My Defold examples" > README.md
+          echo "" >> README.md
+
       - name: Scan for game.project and Build
         run: |
           find . -name 'game.project' -print0 | while IFS= read -r -d '' file; do
             dir=$(dirname "$file")
+            project_name=$(basename "$dir")
             echo "Building project in $dir"
             # Change into the project directory
             cd "$dir"
             # Use ../bob.jar to reference bob.jar from the project directory
             java -jar ../bob.jar resolve --email a@b.com --auth 123456
             java -jar ../bob.jar --platform=${{ matrix.platform }} build --archive --build-server=${{env.BUILD_SERVER}} --variant=${{env.VARIANT}}
-            java -jar ../bob.jar --platform=${{ matrix.platform }} bundle
+            java -jar ../bob.jar --platform=${{ matrix.platform }} bundle --bo=../build_output
+            # Append project link to README.md
+            echo "[$project_name](https://github.com/${{ github.repository }}/tree/master/$project_name) - [HTML bundle](https://ahul.eu/demos/$project_name/)" >> ../README.md
             # Change back to the root directory
             cd -
           done
+
+      - name: Publish README
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config --global user.email "me@agulev.com"
+          git config --global user.name "AGulev's GitHub Actions"
+          git add README.md
+          git diff --staged --exit-code && changed=0 || changed=1
+          if [ "$changed" -eq "1" ]; then
+            git commit -m "Update README with Defold examples"
+            git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
+            git push
+          else
+            echo "No changes to commit."
+          fi
+
+      - name: Publish Examples
+        env:
+          PUBLISH_GAMES_ACCESS_TOKEN: ${{ secrets.PUBLISH_GAMES_ACCESS_TOKEN }}
+        run: |
+          git config --global user.email "me@agulev.com"
+          git config --global user.name "AGulev's GitHub Actions"
+          git clone https://github.com/AGulev/AGulev.git agulev_repo
+          cd agulev_repo
+          git fetch origin ahul.eu:ahul.eu
+          git checkout ahul.eu
+          cd ..
+          cp -r ./build_output/* ./agulev_repo/demos/
+          cd agulev_repo
+          git add demos/
+          git diff --staged --exit-code && changed=0 || changed=1
+          if [ "$changed" -eq "1" ]; then
+            git commit -m "Automated build results"
+            git remote set-url origin https://x-access-token:${PUBLISH_GAMES_ACCESS_TOKEN}@github.com/AGulev/AGulev.git
+            git push origin ahul.eu
+          else
+            echo "No changes to commit."
+          fi
+          
