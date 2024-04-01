@@ -1,0 +1,79 @@
+[bootstrap]
+main_collection = /main/main.collectionc
+
+[script]
+shared_state = 1
+
+[display]
+width = 960
+height = 640
+high_dpi = 1
+
+[android]
+input_method = HiddenInputField
+package = com.defold.example.basic3d
+
+[project]
+title = feyd-rautha_harkonnen_dune_2
+dependencies#0 = https://github.com/Jhonnyg/defold-renderpipeline/archive/refs/heads/master.zip
+
+[physics]
+type = 3D
+
+[osx]
+bundle_identifier = com.defold.example.basic3d
+
+[ios]
+bundle_identifier = com.defold.example.basic3d
+
+[html5]
+heap_size = 64
+htmlfile = /main/engine_template.html
+
+[factory]
+max_count = 1
+
+[gui]
+max_count = 1
+max_particlefx_count = 1
+max_animation_count = 1
+max_particle_count = 1
+
+[label]
+max_count = 1
+
+[mesh]
+max_count = 1
+
+[model]
+max_count = 1
+
+[particle_fx]
+max_count = 1
+max_emitter_count = 1
+max_particle_count = 1
+
+[collection]
+max_instances = 4
+max_input_stack_entries = 1
+
+[collectionfactory]
+max_count = 1
+
+[collection_proxy]
+max_count = 1
+
+[sound]
+max_sound_data = 1
+max_sound_buffers = 1
+max_sound_sources = 1
+max_sound_instances = 1
+max_component_count = 1
+
+[sprite]
+max_count = 1
+
+[tilemap]
+max_count = 1
+max_tile_count = 1
+

@@ -1,0 +1,41 @@
+mesh: "/main/feyd-rautha_harkonnen_dune_2_likeness_sculpt/scene.gltf"
+skeleton: ""
+animations: ""
+default_animation: ""
+name: "unnamed"
+materials {
+  name: "CLothing"
+  material: "/main/infrared-like.material"
+  textures {
+    sampler: "tex0"
+    texture: "/main/feyd-rautha_harkonnen_dune_2_likeness_sculpt/textures/CLothing_baseColor.png"
+  }
+}
+materials {
+  name: "EyeExternal"
+  material: "/main/infrared-like.material"
+}
+materials {
+  name: "FeydHead"
+  material: "/main/infrared-like.material"
+  textures {
+    sampler: "tex0"
+    texture: "/main/feyd-rautha_harkonnen_dune_2_likeness_sculpt/textures/FeydHead_baseColor.png"
+  }
+}
+materials {
+  name: "Teeth"
+  material: "/main/infrared-like.material"
+  textures {
+    sampler: "tex0"
+    texture: "/main/feyd-rautha_harkonnen_dune_2_likeness_sculpt/textures/Teeth_baseColor.png"
+  }
+}
+materials {
+  name: "Tongue"
+  material: "/main/infrared-like.material"
+  textures {
+    sampler: "tex0"
+    texture: "/main/feyd-rautha_harkonnen_dune_2_likeness_sculpt/textures/modified_Tongue_baseColor.png"
+  }
+}

@@ -1,0 +1,23 @@
+go.property("light", vmath.vector4(0, -3, 3, 0))
+
+function init(self)
+    msg.post(".", "acquire_input_focus")
+    msg.post("@render:", "use_camera_projection")
+    msg.post("camera", "acquire_camera_focus")
+    
+    -- position directional light
+    self.light = vmath.vector4(20, 10, 100, 0)
+    go.set("#feyd-rautha", "light", self.light)
+    go.animate("#", "light", go.PLAYBACK_LOOP_PINGPONG, vmath.vector4(20, -80, 100, 0), go.EASING_INOUTSINE, 5)
+end
+
+function update(self)
+    go.set("#feyd-rautha", "light", self.light)
+    -- print(self.light)
+end
+
+function on_reload(self)
+    -- self.light = vmath.vector4(20, 10,  100, 0)
+    -- self.light = vmath.vector4(0, 20, 10, 0)
+    -- go.animate("#", "light", go.PLAYBACK_/LOOP_PINGPONG, vmath.vector4(-0, 100, 20, 0), go.EASING_LINEAR, 1)
+end
