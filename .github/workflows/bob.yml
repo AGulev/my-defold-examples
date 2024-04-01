@@ -60,6 +60,7 @@ jobs:
             java -jar ../bob.jar --platform=${{ matrix.platform }} bundle --bo=../build_output
             # Append project link to README.md
             echo "[$project_name](https://github.com/${{ github.repository }}/tree/master/$project_name) - [HTML bundle](https://ahul.eu/demos/$project_name/)" >> ../README.md
+            echo
             # Change back to the root directory
             cd -
           done
