@@ -30,7 +30,9 @@ bundle_identifier = com.defold.example.basic3d
 [html5]
 heap_size = 64
 htmlfile = /main/engine_template.html
-archive_location_suffix = 1
+archive_location_suffix = ?1
+wasm_streaming = 1
+retry_count = 100
 
 [factory]
 max_count = 1
