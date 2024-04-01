@@ -16,6 +16,14 @@ function update(self)
     -- print(self.light)
 end
 
+function on_input(self, action_id, action)
+    if action_id == hash("touch") then
+        local rot = go.get(".", "euler")
+        rot.y = rot.y + action.dx
+        go.set(".", "euler", rot)
+    end
+end
+
 function on_reload(self)
     -- self.light = vmath.vector4(20, 10,  100, 0)
     -- self.light = vmath.vector4(0, 20, 10, 0)
