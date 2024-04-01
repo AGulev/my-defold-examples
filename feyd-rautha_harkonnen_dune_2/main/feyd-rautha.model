@@ -36,6 +36,6 @@ materials {
   material: "/main/infrared-like.material"
   textures {
     sampler: "tex0"
-    texture: "/main/feyd-rautha_harkonnen_dune_2_likeness_sculpt/textures/modified_Tongue_baseColor.png"
+    texture: "/main/feyd-rautha_harkonnen_dune_2_likeness_sculpt/textures/Tongue_baseColor.png"
   }
 }
