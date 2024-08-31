@@ -60,18 +60,7 @@ jobs:
             java -jar ../bob.jar resolve --email a@b.com --auth 123456
             java -jar ../bob.jar --platform=${{ matrix.platform }} build --archive --build-server=${{env.BUILD_SERVER}} --variant=${{env.VARIANT}}
             java -jar ../bob.jar --platform=${{ matrix.platform }} bundle --bo=../build_output
-            # Determine if the directory is a submodule
-            if git config --file .gitmodules --get-regexp path | grep -q "$dir"; then
-              submodule_url=$(git config --file .gitmodules --get-regexp "submodule\\.$dir\\.url" | awk '{ print $2 }')
-              # Convert SSH URL to HTTPS if needed
-              if [[ "$submodule_url" == git@github.com:* ]]; then
-                submodule_url=${submodule_url/git@github.com:/https:\/\/github.com\/}
-                submodule_url=${submodule_url%.git}  # Remove the .git suffix for a cleaner URL
-              fi
-              echo -e "[$project_name]($submodule_url) - [HTML bundle](https://ahul.eu/demos/$project_name/)\n" >> ../README.md
-            else
-              echo -e "[$project_name](https://github.com/${{ github.repository }}/tree/master/$project_name) - [HTML bundle](https://ahul.eu/demos/$project_name/)\n" >> ../README.md
-            fi
+            echo -e "[$project_name](https://github.com/${{ github.repository }}/tree/master/$project_name) - [HTML bundle](https://ahul.eu/demos/$project_name/)\n" >> ../README.md
             # Change back to the root directory
             cd -
           done
