@@ -1,0 +1,3 @@
+[submodule "drawpixels"]
+	path = drawpixels
+	url = git@github.com:AGulev/drawpixels.git
