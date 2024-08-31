@@ -64,7 +64,7 @@ jobs:
             if git config --file .gitmodules --get-regexp path | grep -q "$dir"; then
               submodule_url=$(git config --file .gitmodules --get-regexp "submodule\\.$dir\\.url" | awk '{ print $2 }')
               # Convert SSH URL to HTTPS if needed
-              if [[ $submodule_url == git@github.com:* ]]; then
+              if [[ "$submodule_url" == git@github.com:* ]]; then
                 submodule_url=${submodule_url/git@github.com:/https:\/\/github.com\/}
                 submodule_url=${submodule_url%.git}  # Remove the .git suffix for a cleaner URL
               fi
